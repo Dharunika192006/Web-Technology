@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Appointment Booking</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6ff;
+        }
+
+        form {
+            width: 600px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        fieldset {
+            border: 2px solid #4a6cf7;
+            padding: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #4a6cf7;
+        }
+
+        .form-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .left {
+            flex: 2;
+        }
+
+        .right {
+            flex: 1;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 6px;
+            margin-top: 5px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Profile image style */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #4a6cf7;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Hide file input */
+        #photoInput {
+            display: none;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<form autocomplete="on">
+    <fieldset>
+        <legend>Hospital Appointment Form</legend>
+
+        <div class="form-container">
+
+            <!-- LEFT SIDE -->
+            <div class="left">
+                <label>Patient Name:</label>
+                <input type="text" required pattern="[A-Za-z ]{3,}">
+
+                <label>Age:</label>
+                <input type="number" min="1" max="120" required>
+
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" required> Male</label>
+                    <label><input type="radio" name="gender"> Female</label>
+                    <label><input type="radio" name="gender"> Other</label>
+                </div>
+
+                <label>Select Doctor:</label>
+                <select required>
+                    <option value="">--Select Doctor--</option>
+                    <option>General Physician</option>
+                    <option>Cardiologist</option>
+                    <option>Dermatologist</option>
+                    <option>Orthopedic</option>
+                </select>
+
+                <label>Appointment Date:</label>
+                <input type="date" required>
+
+                <label>Symptoms:</label>
+                <textarea rows="3"></textarea>
+
+                <label>Contact Number:</label>
+                <input type="tel" required pattern="[6-9]{1}[0-9]{9}">
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="right">
+                <label>Upload Profile Photo</label>
+
+                <!-- Clickable Image -->
+                <label for="photoInput">
+                    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+                         alt="Profile Photo"
+                         class="profile-pic"
+                         id="profileImage">
+                </label>
+
+                <!-- Hidden File Input -->
+                <input type="file" id="photoInput" accept="image/*"
+                       onchange="loadPhoto(event)">
+                <p>Click image to upload</p>
+            </div>
+
+        </div>
+
+        <button type="submit">Book Appointment</button>
+
+        <div class="link">
+            <a href="https://www.practo.com" target="_blank">Visit Practo</a>
+        </div>
+
+    </fieldset>
+</form>
+
+<script>
+    function loadPhoto(event) {
+        const image = document.getElementById('profileImage');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+
+</body>
+</html>
