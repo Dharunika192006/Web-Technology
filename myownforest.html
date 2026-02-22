@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forest Designer</title>
+
+<style>
+/* ===== GENERAL ===== */
+body{
+    background:#eaf7ea;
+    margin:0;
+    padding:10px;
+    text-align:center;
+}
+
+/* ATTRACTIVE HEADING */
+h1{
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-size:36px;
+    color:#1b5e20;
+    font-weight:900;
+    letter-spacing:1px;
+    margin-bottom:5px;
+}
+
+/* ATTRACTIVE SUBTITLE */
+.subtitle{
+    font-family: "Comic Sans MS", "Segoe Script", cursive;
+    font-size:18px;
+    color:#2e7d32;
+    margin-bottom:10px;
+}
+
+/* LAYOUT */
+.container{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+/* TOOLBOX */
+.toolbox{
+    width:250px;
+    background:#ffffff;
+    padding:10px;
+    border-radius:14px;
+    box-shadow:0 6px 12px rgba(0,0,0,0.2);
+    max-height:520px;
+    overflow-y:auto;
+}
+
+.toolbox h3{
+    font-family: "Segoe UI", sans-serif;
+    color:#2e7d32;
+}
+
+/* TOOL ITEM */
+.item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:6px 0;
+    padding:6px;
+    border-radius:10px;
+    background:#f1f8e9;
+    border:1px solid #c8e6c9;
+    cursor:grab;
+}
+
+.item img{
+    width:40px;
+    height:40px;
+}
+
+.item span{
+    font-size:14px;
+}
+
+/* FOREST AREA */
+.forest{
+    width:880px;
+    height:520px;
+    border:4px solid #2e7d32;
+    border-radius:14px;
+    background:url("images/forest-bg.jpg") center/cover no-repeat;
+    position:relative;
+}
+
+/* WRAPPER FOR RESIZABLE IMAGE */
+.resizable{
+    position:absolute;
+    resize:both;
+    overflow:hidden;
+    min-width:30px;
+    min-height:30px;
+}
+
+/* IMAGE INSIDE FOREST */
+.resizable img{
+    width:100%;
+    height:100%;
+    pointer-events:none;
+}
+
+/* UNDO BUTTON */
+button{
+    padding:8px 18px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🌲 Design Your Own Forest 🌲</h1>
+<div class="subtitle">
+    Drag • Drop • Resize • Create Your Dream Forest
+</div>
+
+<button onclick="undoLast()">↩ Undo</button>
+
+<div class="container">
+
+<!-- TOOLBOX -->
+<div class="toolbox">
+<h3>Forest Items</h3>
+
+<div class="item" draggable="true" data-img="bug.png"><img src="images/bug.png"><span>Bug</span></div>
+<div class="item" draggable="true" data-img="bluebird.png"><img src="images/bluebird.png"><span>Blue Bird</span></div>
+<div class="item" draggable="true" data-img="bunny.png"><img src="images/bunny.png"><span>Bunny</span></div>
+<div class="item" draggable="true" data-img="butterfly.png"><img src="images/butterfly.png"><span>Butterfly</span></div>
+<div class="item" draggable="true" data-img="daisy.png"><img src="images/daisy.png"><span>Daisy</span></div>
+<div class="item" draggable="true" data-img="deer.png"><img src="images/deer.png"><span>Deer</span></div>
+<div class="item" draggable="true" data-img="flower.png"><img src="images/flower.png"><span>Flower</span></div>
+<div class="item" draggable="true" data-img="fox.png"><img src="images/fox.png"><span>Fox</span></div>
+<div class="item" draggable="true" data-img="insect.png"><img src="images/insect.png"><span>Insect</span></div>
+<div class="item" draggable="true" data-img="peacock.png"><img src="images/peacock.png"><span>Peacock</span></div>
+<div class="item" draggable="true" data-img="plant.png"><img src="images/plant.png"><span>Plant</span></div>
+<div class="item" draggable="true" data-img="rock.png"><img src="images/rock.png"><span>Rock</span></div>
+<div class="item" draggable="true" data-img="snail.png"><img src="images/snail.png"><span>Snail</span></div>
+<div class="item" draggable="true" data-img="tree.png"><img src="images/tree.png"><span>Tree</span></div>
+<div class="item" draggable="true" data-img="springtree.png"><img src="images/springtree.png"><span>Spring Tree</span></div>
+<div class="item" draggable="true" data-img="tiger.png"><img src="images/tiger.png"><span>Tiger</span></div>
+<div class="item" draggable="true" data-img="zebra.png"><img src="images/zebra.png"><span>Zebra</span></div>
+<div class="item" draggable="true" data-img="giraffee.png"><img src="images/giraffee.png"><span>Giraffe</span></div>
+</div>
+
+<!-- FOREST -->
+<div class="forest" id="forest"></div>
+
+</div>
+
+<script>
+let selectedImg = null;
+let placedItems = [];
+
+// DRAG START
+document.querySelectorAll(".item").forEach(item=>{
+    item.addEventListener("dragstart",()=>{
+        selectedImg = item.dataset.img;
+    });
+});
+
+const forest = document.getElementById("forest");
+
+// ALLOW DROP
+forest.addEventListener("dragover",e=>e.preventDefault());
+
+// DROP + RESIZE
+forest.addEventListener("drop",e=>{
+    e.preventDefault();
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "resizable";
+    wrapper.style.left = e.offsetX + "px";
+    wrapper.style.top = e.offsetY + "px";
+    wrapper.style.width = "60px";
+    wrapper.style.height = "60px";
+
+    const img = document.createElement("img");
+    img.src = "images/" + selectedImg;
+
+    wrapper.appendChild(img);
+    forest.appendChild(wrapper);
+    placedItems.push(wrapper);
+});
+
+// UNDO
+function undoLast(){
+    if(placedItems.length > 0){
+        forest.removeChild(placedItems.pop());
+    }
+}
+</script>
+
+</body>
+</html>
