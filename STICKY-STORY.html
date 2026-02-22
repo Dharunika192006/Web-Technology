@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Story Corner</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-image: url("download1.jpg"); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            overflow: hidden;
+        }
+
+        .page {
+            width: 95%;
+            max-width: 1100px;
+            text-align: center;
+            margin-top: 30px; 
+        }
+
+        /* TITLE */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        /* QUOTES */
+        .quotes {
+            margin-bottom: 22px;
+            line-height: 1.7; 
+        }
+
+        .main-quote {
+            font-family: 'Great Vibes', cursive;
+            font-size: 28px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .quotes p {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            margin: 4px 0;
+        }
+
+        /* STICKY NOTES */
+        .story-box {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            padding: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            border-radius: 12px;
+            box-shadow: 3px 4px 12px rgba(0,0,0,0.25);
+            transform: rotate(-2deg);
+        }
+
+        .note:nth-child(2) { transform: rotate(2deg); }
+        .note:nth-child(3) { transform: rotate(-1deg); }
+        .note:nth-child(4) { transform: rotate(2deg); }
+        .note:nth-child(5) { transform: rotate(-1deg); }
+
+        .yellow { background: #fff6a3; }
+        .pink   { background: #ffd6e0; }
+        .blue   { background: #d6f0ff; }
+        .green  { background: #d6ffe6; }
+        .orange { background: #ffe5c7; }
+
+        /* SIDE SECTION */
+        .side-section {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        /* TABLE */
+        .table-box {
+            width: 72%;
+            background: white;
+            padding: 14px;
+            border-radius: 16px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        }
+
+        .table-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        th {
+            background: black;
+            color: gold;
+            padding: 7px;
+        }
+
+        td {
+            padding: 7px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) { background: #f7e7ce; }
+        tr:nth-child(odd)  { background: #fffaf0; }
+
+        /* ATTRACTIVE CONTINUE BOX */
+        .links-box {
+            width: 28%;
+            background: linear-gradient(135deg, #000, #1a1a1a, #333);
+            color: white;
+            padding: 18px 14px;
+            border-radius: 18px;
+            box-shadow: 0 0 18px rgba(255,215,0,0.35);
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .links-box:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 0 28px rgba(255,215,0,0.65);
+        }
+
+        .links-box h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        a {
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <h1>A Corner of Timeless Stories</h1>
+
+    <div class="quotes">
+        <div class="main-quote">“Turn the page, let the tale begin.”</div>
+        <p>Every story begins with a moment of wonder.</p>
+        <p>Where imagination turns into memories.</p>
+        <p>A quiet corner for timeless tales.</p>
+    </div>
+
+    <div class="story-box">
+        <div class="note yellow">Once upon a time, a 👑 lived in a beautiful 🌍.</div>
+        <div class="note pink">The 👑 ruled with wisdom and kindness.</div>
+        <div class="note blue">Many 👥 admired the 👑 with full ❤️.</div>
+        <div class="note green">One day, the 👑 chose ❤️ over ⚔️.</div>
+        <div class="note orange">Soon, the 🌍 was filled with ☮️ and 😊.</div>
+    </div>
+
+    <div class="side-section">
+
+        <div class="table-box">
+            <h2>✨ Characters & Symbols</h2>
+            <table>
+                <tr><th>Emoji</th><th>Meaning</th></tr>
+                <tr><td>👑</td><td>King / Ruler</td></tr>
+                <tr><td>🌍</td><td>World / Kingdom</td></tr>
+                <tr><td>👥</td><td>People / Citizens</td></tr>
+                <tr><td>❤️</td><td>Love & Compassion</td></tr>
+                <tr><td>⚔️</td><td>War / Conflict</td></tr>
+                <tr><td>☮️</td><td>Peace</td></tr>
+                <tr><td>😊</td><td>Happiness</td></tr>
+            </table>
+        </div>
+
+        <div class="links-box">
+            <h2> Continue Your Reading Journey! </h2>
+            <ul>
+                <li><a href="https://www.storyberries.com/" target="_blank">Storyberries</a></li>
+                <li><a href="https://americanliterature.com/short-stories-for-children" target="_blank">American Literature</a></li>
+                <li><a href="https://www.bedtimezoo.com/" target="_blank">Bedtime Zoo</a></li>
+                <li><a href="https://www.fairytalez.com/" target="_blank">Fairytalez</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
