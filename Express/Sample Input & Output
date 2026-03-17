@@ -1,0 +1,11 @@
+How to Run the Server:
+node server.js
+
+Test in Browser / Postman:
+Example URL:
+http://localhost:3000/sort?name=9,5,2,8,1
+Output:
+{
+  "input": [9,5,2,8,1],
+  "sorted": [1,2,5,8,9]
+}
