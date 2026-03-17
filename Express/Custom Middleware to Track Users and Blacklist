@@ -1,0 +1,43 @@
+const express = require("express");
+const app = express();
+
+let requestCount = {};
+let blacklist = [];
+
+// CUSTOM MIDDLEWARE
+function trackUser(req, res, next) {
+
+    const userIP = req.ip;
+
+    // Check if user is already blacklisted
+    if (blacklist.includes(userIP)) {
+        return res.send("Access Denied: You are blacklisted");
+    }
+
+    // Count requests
+    if (!requestCount[userIP]) {
+        requestCount[userIP] = 1;
+    } else {
+        requestCount[userIP]++;
+    }
+
+    // If requests exceed limit
+    if (requestCount[userIP] > 5) {
+        blacklist.push(userIP);
+        return res.send("Too many requests! User added to blacklist");
+    }
+
+    next();
+}
+
+// Use middleware
+app.use(trackUser);
+
+// Sample API
+app.get("/", (req, res) => {
+    res.send("Request accepted");
+});
+
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
