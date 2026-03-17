@@ -1,0 +1,59 @@
+const express = require("express");
+const app = express();
+const PORT = 3000;
+
+// Merge two arrays
+function merge(left, right) {
+    let result = [];
+    let i = 0;
+    let j = 0;
+
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) {
+            result.push(left[i]);
+            i++;
+        } else {
+            result.push(right[j]);
+            j++;
+        }
+    }
+
+    return result.concat(left.slice(i)).concat(right.slice(j));
+}
+
+// Merge Sort Function
+function mergeSort(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    }
+
+    const mid = Math.floor(arr.length / 2);
+
+    const left = mergeSort(arr.slice(0, mid));
+    const right = mergeSort(arr.slice(mid));
+
+    return merge(left, right);
+}
+
+// REST API
+app.get("/sort", (req, res) => {
+
+    let input = req.query.name;
+
+    if (!input) {
+        return res.send("Please provide numbers like ?name=5,3,8,1");
+    }
+
+    let numbers = input.split(",").map(Number);
+
+    let sortedArray = mergeSort(numbers);
+
+    res.json({
+        input: numbers,
+        sorted: sortedArray
+    });
+});
+
+app.listen(PORT, () => {
+    console.log("Server running on port " + PORT);
+});
